@@ -1,0 +1,54 @@
+{
+    "assets": [
+        {
+            "appid": 730,
+            "contextid": "2",
+            "assetid": "38634571006",
+            "classid": "469444104",
+            "instanceid": "302028390",
+            "amount": "1"
+        },
+        {
+            "appid": 730,
+            "contextid": "2",
+            "assetid": "38540250318",
+            "classid": "3035571818",
+            "instanceid": "302028390",
+            "amount": "1"
+        },
+        {
+            "appid": 730,
+            "contextid": "2",
+            "assetid": "38540250317",
+            "classid": "310776817",
+            "instanceid": "302028390",
+            "amount": "1"
+        }
+    ],
+    "descriptions": [
+        {
+            "appid": 730,
+            "classid": "469444104",
+            "instanceid": "302028390",
+            "currency": 0,
+            "background_color": "",
+            "icon_url": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpoo7e1f1Jf0v73cjxQ7tO4q4aClfLmDLfYkWNFpsZz3bmY9tr331e3rRFoa2Hwd9KcJ1I_ZAnW8la9lOe91JC0u5jJzyB9-n51oKGBmcU"
+        },
+        {
+            "appid": 730,
+            "classid": "3035571818",
+            "instanceid": "302028390",
+            "currency": 0,
+            "background_color": "",
+            "icon_url": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpoo7e1f1Jf0v73cjxQ7tO4q4aClfLmDLfYkWNFpsZz3bmY9tr331e3rRFoa2Hwd9KcJ1I_ZAnW8la9lOe91JC0u5jJzyB9-n51oKGBmcU"
+        },
+        {
+            "appid": 730,
+            "classid": "310776817",
+            "instanceid": "302028390",
+            "currency": 0,
+            "background_color": "",
+            "icon_url": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpoo7e1f1Jf0v73cjxQ7tO4q4aClfLmDLfYkWNFpsZz3bmY9tr331e3rRFoa2Hwd9KcJ1I_ZAnW8la9lOe91JC0u5jJzyB9-n51oKGBmcU"
+        }
+    ]
+}
