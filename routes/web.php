@@ -9,3 +9,5 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('logout', [SteamAuthController::class, 'logout']);
     Route::get('user', [SteamAuthController::class, 'user']);
 });
+
+Route::get('{any?}', fn () => view("app"))->where('any', '.*');
