@@ -3,22 +3,18 @@
 namespace App\Services\Transactions;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Repositories\Withdraw\WithdrawRepository;
 use Illuminate\Http\JsonResponse;
 
 class WithdrawService
 {
-    public function withdraw(Request $request): JsonResponse
+    public function __construct(
+        protected WithdrawRepository $withdrawRepository
+    ) {
+    }
+
+    public function withdraw(array $data, User $user): void
     {
-        $user = User::find($request->input('user_id'));
-
-        if ($user->balanceFloat < $request->input('amount')) {
-            return response()->json(['message' => 'Недостатньо коштів на балансі'], 400);
-        }
-
-        $withdrawAmount = $request->input('amount');
-        $user->withdrawFloat($withdrawAmount);
-
-        return response()->json(['message' => 'Кошти виведено з балансу користувача'], 200);
+        $this->withdrawRepository->withdraw($data, $user);
     }
 }

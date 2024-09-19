@@ -3,21 +3,30 @@
 namespace App\Http\Controllers\Transactions;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Transactions\WithdrawRequest;
+use App\Models\User;
 use App\Services\Transactions\WithdrawService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class WithdrawController extends Controller
 {
-    protected $withdrawService;
-
-    public function __construct(WithdrawService $withdrawService)
-    {
-        $this->withdrawService = $withdrawService;
+    public function __construct(
+        protected WithdrawService $withdrawService
+    ){
     }
 
-    public function withdraw(Request $request): JsonResponse
+    public function withdraw(WithdrawRequest $request): JsonResponse
     {
-        return $this->withdrawService->withdraw($request);
+        $user = User::query()->find($request->user_id);
+        $data = $request->validated();
+
+        if ($user->balance < $data['amount']) {
+            return response()->json(['message' => 'Недостатньо коштів на балансі'], 400);
+        }
+
+        $this->withdrawService->withdraw($data, $user);
+
+        return response()->json(['message' => 'Кошти успішно виведено'], 200);
     }
 }

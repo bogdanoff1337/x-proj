@@ -8,6 +8,6 @@ class BalanceRepository implements BalanceRepositoryInterface
 {
     public function getBalance(User $user): float
     {
-        return $user->balance;
+        return $user->balanceFloat;
     }
 }

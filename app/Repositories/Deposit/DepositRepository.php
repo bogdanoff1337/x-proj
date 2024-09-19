@@ -10,6 +10,6 @@ class DepositRepository implements DepositRepositoryInterface
     {
         $user = User::query()->find($data['user_id']);
 
-        return $user->deposit($data['amount']);
+        return $user->depositFloat($data['amount']);
     }
 }

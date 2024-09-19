@@ -9,8 +9,8 @@ use App\Http\Controllers\Items\ItemsController;
 use App\Http\Controllers\Lot\LotController;
 
 //Route::group(['middleware' => 'SteamAuthenticate'], function () {
-    Route::post('deposit', [DepositController::class, 'deposit']);
-    Route::post('withdraw', [WithdrawController::class, 'withdraw']);
+Route::post('withdraw', [WithdrawController::class, 'withdraw']);
+Route::post('deposit', [DepositController::class, 'deposit']);
     Route::get('balance/{user}', [BalanceController::class, 'getBalance']);
 
     Route::get('items/{steamId}', [ItemsController::class, 'getInventory']);

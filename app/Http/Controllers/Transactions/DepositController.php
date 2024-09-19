@@ -10,11 +10,9 @@ use Illuminate\Http\JsonResponse;
 
 class DepositController extends Controller
 {
-    protected $depositService;
-
-    public function __construct(DepositService $depositService)
-    {
-        $this->depositService = $depositService;
+    public function __construct(
+        protected DepositService $depositService
+    ) {
     }
 
     public function deposit(DepositeRequest $request): JsonResponse
