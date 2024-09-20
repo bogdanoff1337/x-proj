@@ -3,17 +3,21 @@
 import Burger from './Burger.vue';
 import { ref, onMounted } from 'vue';
 import { useMediaQuery } from '@vueuse/core';
+import { useUserStore } from '../src/hooks/store/useUserStore';
 import axios from 'axios';
 
 const user = ref(null);
 const isAuthenticated = ref(false);
 const error = ref(null);
 const isLoading = ref(true);
+
 const isMobile = useMediaQuery('(max-width: 768px)');
 
 const login = () => {
     window.open('auth/steam', '_blank');
 };
+
+const userStore = useUserStore();
 
 const logout = async () => {
     try {
@@ -29,6 +33,7 @@ const checkAuth = async () => {
     try {
         const res = await axios.get('auth/user');
         user.value = res.data.data;
+        userStore.setUser(res.data.data);
         isAuthenticated.value = true;
     } catch (err) {
         isAuthenticated.value = false;
@@ -93,8 +98,7 @@ onMounted(checkAuth);
 
 <style scoped>
 header {
-   margin: 0;
-   padding: 0;
+    padding: 10px 0;
 }
 
 .container {
@@ -111,95 +115,84 @@ header {
     display: flex;
     align-items: center;
     gap: 20px;
-}
 
-.left h1 {
-    color: #fff;
-    margin: 0;
-    font-size: 26px;
-}
+    h1 {
+        color: #fff;
+        margin: 0;
+        font-size: 26px;
+    }
 
-.left a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
+    a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
 
-.left nav {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
 
-.left span {
-    color: #fff;
-    font-size: 22px;
-}
+    span {
+        color: #fff;
+        font-size: 22px;
+    }
 
-.left img {
-    width: 35px;
-    height: 35px;
-    color: #0000cc;
-}
+    img {
+        width: 35px;
+        height: 35px;
+        color: #0000cc;
+    }
 
-.left .referral {
-    margin-top: 12px;
+    .referral {
+        margin-top: 12px;
+    }
 }
 
 .right {
     display: flex;
     align-items: center;
-}
 
-.right nav {
-    align-items: center;
-    display: flex;
-    gap: 20px;
-}
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
 
-.right a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
+    a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
 
-.right span {
-    color: #fff;
-    font-size: 22px;
-}
+    span {
+        color: #fff;
+        font-size: 22px;
+    }
 
-.right .avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
+    .avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
 
-.right .exit-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 0;
-}
+    .exit-icon,
+    .income {
+        width: 35px;
+        height: 35px;
+        border-radius: 0;
+    }
 
-.right .income {
-    width: 35px;
-    height: 35px;
-    border-radius: 0;
-}
-
-.right .deposit {
-    margin-right: 15px;
-}
-
-.burger-icon {
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
+    .deposit {
+        margin-right: 15px;
+    }
 }
 
 button {
@@ -210,4 +203,36 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
+
+@media (max-width: 768px) {
+    .right {
+        .avatar,
+        .income,
+        .exit-icon {
+            width: 25px;
+            height: 25px;
+        }
+
+        .deposit {
+            font-size: 18px;
+        }
+
+        nav {
+            gap: 10px;
+        }
+    }
+
+    .left {
+        img {
+            width: 25px;
+            height: 25px;
+        }
+    }
+
+    button {
+        padding: 8px 16px;
+    }
+}
+
 </style>
+

@@ -9,7 +9,7 @@
 
 <style scoped>
 .container {
-    max-width: 500px;
+    max-width: 900px;
     margin: 20px auto;
     padding: 0 20px;
     box-sizing: border-box;

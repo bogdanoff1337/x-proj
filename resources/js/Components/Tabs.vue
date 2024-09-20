@@ -12,17 +12,18 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import {ref, watch} from 'vue';
+import {useRoute} from 'vue-router';
 
 const route = useRoute();
+// const props = defineProps(['user']);
 
 const tabs = ref([
-    { name: 'Profile', route: '/profile' },
-    { name: 'Inventory', route: '/inventory' },
-    { name: 'Statistic', route: '/statistic' },
-    { name: 'Referrals', route: '/referrals' },
-    { name: 'Settings', route: '/settings' },
+    {name: 'Profile',   route: '/profile'},
+    {name: 'Inventory', route: '/inventory'},
+    {name: 'Statistic', route: '/statistic'},
+    {name: 'Referrals', route: '/referrals'},
+    {name: 'Settings',  route: '/settings'},
 ]);
 
 const activeTab = ref(route.path);
@@ -52,7 +53,7 @@ watch(route, (newRoute) => {
 }
 
 .tabs li {
-    flex: none;
+    flex: 1;
     text-align: center;
     padding: 10px 15px;
     cursor: pointer;

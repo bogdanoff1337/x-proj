@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Transactions\DepositController;
 use App\Http\Controllers\Transactions\WithdrawController;
 use App\Http\Controllers\Balance\BalanceController;
@@ -9,8 +9,11 @@ use App\Http\Controllers\Items\ItemsController;
 use App\Http\Controllers\Lot\LotController;
 
 //Route::group(['middleware' => 'SteamAuthenticate'], function () {
-Route::post('withdraw', [WithdrawController::class, 'withdraw']);
-Route::post('deposit', [DepositController::class, 'deposit']);
+    // user routes
+    Route::post('user/trade-url', [UserController::class, 'update']);
+
+    Route::post('withdraw', [WithdrawController::class, 'withdraw']);
+    Route::post('deposit', [DepositController::class, 'deposit']);
     Route::get('balance/{user}', [BalanceController::class, 'getBalance']);
 
     Route::get('items/{steamId}', [ItemsController::class, 'getInventory']);

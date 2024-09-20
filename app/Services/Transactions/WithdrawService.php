@@ -4,7 +4,6 @@ namespace App\Services\Transactions;
 
 use App\Models\User;
 use App\Repositories\Withdraw\WithdrawRepository;
-use Illuminate\Http\JsonResponse;
 
 class WithdrawService
 {

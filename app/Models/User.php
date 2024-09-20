@@ -27,7 +27,8 @@ class User extends Authenticatable implements Wallet
         'nickname',
         'email',
         'avatar',
-        'profile_url'
+        'profile_url',
+        'trade_url',
     ];
 
     /**
