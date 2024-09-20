@@ -1,6 +1,8 @@
 <script setup>
-import {ref, onMounted} from 'vue';
-import {useMediaQuery} from '@vueuse/core';
+
+import Burger from './Burger.vue';
+import { ref, onMounted } from 'vue';
+import { useMediaQuery } from '@vueuse/core';
 import axios from 'axios';
 
 const user = ref(null);
@@ -39,18 +41,20 @@ const checkAuth = async () => {
 onMounted(checkAuth);
 </script>
 
-<template >
+<template>
     <header>
         <div class="container">
             <div class="left">
-                <h1>X-PROJ</h1>
+                <a href="/">
+                    <h1>X-PROJ</h1>
+                </a>
                 <nav v-if="!isMobile">
                     <a href="https://t.me/bogdanoff1337">
-                        <img src="../../svg/telegram.svg" alt="Telegram"/>
+                        <img src="../../svg/telegram.svg" alt="Telegram" />
                     </a>
 
                     <a href="/bonus">
-                        <img src="../../svg/bonus.svg" alt="Bonus"/>
+                        <img src="../../svg/bonus.svg" alt="Bonus" />
                         <span class="referral">Bonus</span>
                     </a>
                 </nav>
@@ -63,20 +67,21 @@ onMounted(checkAuth);
 
                     <template v-else-if="isAuthenticated">
                         <a href="/deposit">
-                        <span class="deposit">
-                            {{ user.money + '$' }}
-                        </span>
-                            <img src="../../svg/income.svg" alt="Income" class="income"/>
+                            <span class="deposit">{{ user.money + '$' }}</span>
+                            <img src="../../svg/plus.svg" alt="Income" class="income" />
                         </a>
 
-                        <a href="/profile">
-                            <img :src="user.avatar" alt="User" class="avatar"/>
+                        <router-link to="/profile">
+                            <img :src="user.avatar" alt="User" class="avatar" />
+                        </router-link>
+
+                        <a v-if="!isMobile" @click.prevent="logout">
+                            <img src="../../svg/exit.svg" alt="Exit" class="exit-icon" />
                         </a>
 
-                        <a @click.prevent="logout">
-                            <img src="../../svg/exit.svg" alt="Exit" class="exit-icon"/>
-                        </a>
+                        <Burger v-else @logout="logout" />
                     </template>
+
                     <template v-else>
                         <button @click.prevent="login">Authorization</button>
                     </template>
@@ -87,9 +92,9 @@ onMounted(checkAuth);
 </template>
 
 <style scoped>
-
 header {
-
+   margin: 0;
+   padding: 0;
 }
 
 .container {
@@ -191,8 +196,14 @@ header {
     margin-right: 15px;
 }
 
+.burger-icon {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
 button {
-    background-color: #BD63BC;
+    background-color: #bd63bc;
     color: #fff;
     padding: 10px 20px;
     border: none;
