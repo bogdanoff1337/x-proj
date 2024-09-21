@@ -58,6 +58,7 @@ class FetchInventory extends Command
                 continue;
             }
             Item::firstOrCreate([
+                'user_id' => $user->id,
                 'assetid' => $item['assetid'],
             ], [
                 'classid' => $item['classid'],

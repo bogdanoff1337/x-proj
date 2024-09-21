@@ -16,7 +16,8 @@
         "laravel/socialite": "^5.15",
         "laravel/tinker": "^2.8",
         "socialiteproviders/steam": "^4.2",
-        "syntax/steam-api": "^3.0"
+        "syntax/steam-api": "^3.0",
+        "ext-dom": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

@@ -16,11 +16,9 @@ import {ref, watch} from 'vue';
 import {useRoute} from 'vue-router';
 
 const route = useRoute();
-// const props = defineProps(['user']);
 
 const tabs = ref([
     {name: 'Profile',   route: '/profile'},
-    {name: 'Inventory', route: '/inventory'},
     {name: 'Statistic', route: '/statistic'},
     {name: 'Referrals', route: '/referrals'},
     {name: 'Settings',  route: '/settings'},

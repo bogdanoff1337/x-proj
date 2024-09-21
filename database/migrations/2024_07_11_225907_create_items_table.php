@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('icon_url')->nullable();
             $table->string('assetid');
             $table->string('classid');
@@ -22,7 +23,7 @@ return new class extends Migration
             $table->decimal('steam_price', 10, 2)->nullable();
             $table->string('type')->nullable();
             $table->string('float')->nullable();
-            $table->text('stickers')->nullable();
+            $table->json('stickers')->nullable();
             $table->timestamps();
         });
     }

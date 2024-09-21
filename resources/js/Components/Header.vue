@@ -11,6 +11,11 @@ const isAuthenticated = ref(false);
 const error = ref(null);
 const isLoading = ref(true);
 
+import TelegramIcon from '../../svg/telegram.svg?component';
+import BonusIcon from '../../svg/bonus.svg?component';
+import PlusIcon from '../../svg/plus.svg?component';
+import ExitIcon from '../../svg/exit.svg?component';
+
 const isMobile = useMediaQuery('(max-width: 768px)');
 
 const login = () => {
@@ -47,48 +52,47 @@ onMounted(checkAuth);
 </script>
 
 <template>
-    <header>
-        <div class="container">
-            <div class="left">
-                <a href="/">
-                    <h1>X-PROJ</h1>
+    <header class="header">
+        <div class="header__container">
+            <div class="header__left">
+                <a href="/" class="header__logo">
+                    <h1 class="header__title">X-PROJ</h1>
                 </a>
-                <nav v-if="!isMobile">
-                    <a href="https://t.me/bogdanoff1337">
-                        <img src="../../svg/telegram.svg" alt="Telegram" />
+                <nav v-if="!isMobile" class="header__nav">
+                    <a href="https://t.me/bogdanoff1337" class="header__link">
+                        <TelegramIcon class="header__icon"/>
                     </a>
-
-                    <a href="/bonus">
-                        <img src="../../svg/bonus.svg" alt="Bonus" />
-                        <span class="referral">Bonus</span>
+                    <a href="/bonus" class="header__link">
+                        <BonusIcon class="header__icon"/>
+                        <span class="header__referral">Bonus</span>
                     </a>
                 </nav>
             </div>
-            <div class="right">
-                <nav>
+            <div class="header__right">
+                <nav class="header__nav">
                     <template v-if="isLoading">
                         <span>Loading...</span>
                     </template>
 
                     <template v-else-if="isAuthenticated">
-                        <a href="/deposit">
-                            <span class="deposit">{{ user.money + '$' }}</span>
-                            <img src="../../svg/plus.svg" alt="Income" class="income" />
+                        <a href="/deposit" class="header__link">
+                            <span class="header__deposit">{{ user.money + '$' }}</span>
+                            <PlusIcon class="header__icon"/>
                         </a>
 
-                        <router-link to="/profile">
-                            <img :src="user.avatar" alt="User" class="avatar" />
+                        <router-link to="/profile" class="header__link">
+                            <img :src="user.avatar" alt="User" class="header__avatar" />
                         </router-link>
 
-                        <a v-if="!isMobile" @click.prevent="logout">
-                            <img src="../../svg/exit.svg" alt="Exit" class="exit-icon" />
+                        <a v-if="!isMobile" @click.prevent="logout" class="header__link">
+                            <ExitIcon class="header__icon"/>
                         </a>
 
                         <Burger v-else @logout="logout" />
                     </template>
 
                     <template v-else>
-                        <button @click.prevent="login">Authorization</button>
+                        <button @click.prevent="login" class="header__button">Authorization</button>
                     </template>
                 </nav>
             </div>
@@ -96,74 +100,41 @@ onMounted(checkAuth);
     </header>
 </template>
 
-<style scoped>
-header {
+<style scoped lang="scss">
+.header {
     padding: 10px 0;
-}
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: content-box;
-    max-width: 2100px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-
-    h1 {
-        color: #fff;
-        margin: 0;
-        font-size: 26px;
-    }
-
-    a {
-        text-decoration: none;
-        color: #fff;
-        font-size: 16px;
+    &__container {
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        cursor: pointer;
+        max-width: 2100px;
+        margin: 0 auto;
+        padding: 0 20px;
     }
 
-    nav {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    span {
-        color: #fff;
-        font-size: 22px;
-    }
-
-    img {
+    &__icon {
         width: 35px;
         height: 35px;
-        color: #0000cc;
     }
 
-    .referral {
-        margin-top: 12px;
-    }
-}
-
-.right {
-    display: flex;
-    align-items: center;
-
-    nav {
+    &__left {
         display: flex;
         align-items: center;
         gap: 20px;
     }
 
-    a {
+    &__logo {
+        text-decoration: none;
+    }
+
+    &__title {
+        color: #fff;
+        margin: 0;
+        font-size: 26px;
+    }
+
+    &__link {
         text-decoration: none;
         color: #fff;
         font-size: 16px;
@@ -172,67 +143,66 @@ header {
         cursor: pointer;
     }
 
-    span {
-        color: #fff;
-        font-size: 22px;
+    &__nav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
-    .avatar {
+    &__referral {
+        color: #fff;
+        font-size: 22px;
+        margin-top: 12px;
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+    }
+
+    &__avatar {
         width: 50px;
         height: 50px;
         border-radius: 50%;
     }
 
-    .exit-icon,
-    .income {
-        width: 35px;
-        height: 35px;
-        border-radius: 0;
-    }
-
-    .deposit {
+    &__deposit {
         margin-right: 15px;
+        color: #fff;
+        font-size: 22px;
     }
-}
 
-button {
-    background-color: #bd63bc;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+    &__button {
+        background-color: #bd63bc;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-@media (max-width: 768px) {
-    .right {
-        .avatar,
-        .income,
-        .exit-icon {
+    @media (max-width: 768px) {
+        &__avatar, &__icon {
             width: 25px;
             height: 25px;
         }
 
-        .deposit {
+        &__deposit {
             font-size: 18px;
         }
 
-        nav {
+        &__nav {
             gap: 10px;
         }
-    }
 
-    .left {
-        img {
+        &__left img {
             width: 25px;
             height: 25px;
         }
-    }
 
-    button {
-        padding: 8px 16px;
+        &__button {
+            padding: 8px 16px;
+        }
     }
 }
-
 </style>
-

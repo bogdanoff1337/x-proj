@@ -3,6 +3,7 @@ import axios from 'axios';
 export const useUserStore = defineStore('user', {
     state: () => ({
         user: {
+            id: null,
             trade_url: '',
             avatar: '',
         },

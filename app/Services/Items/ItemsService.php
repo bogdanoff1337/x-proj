@@ -4,6 +4,7 @@ namespace App\Services\Items;
 
 use App\Models\SteamItemPrice;
 use App\Models\TradeHistory;
+use DOMDocument;
 use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
@@ -83,14 +84,34 @@ class ItemsService
         return $combinedData;
     }
 
-    protected function getStickers($data): string
+    protected function getStickers($data): ?string
     {
         if (!isset($data[6])) {
-            return '';
+            return null;
         }
 
-        return $data[6]['value'];
+        $stickersHtml = $data[6]['value'];
+        $dom = new DOMDocument();
+        @$dom->loadHTML($stickersHtml);
+
+        $stickers = [];
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $index => $img) {
+            $src = $img->getAttribute('src');
+
+            $labelText = $dom->textContent;
+            $labels = explode(', ', trim(substr($labelText, strpos($labelText, 'Sticker:') + 8)));
+
+            $stickers[] = [
+                'image' => $src,
+                'label' => $labels[$index] ?? 'Sticker ' . ($index + 1),
+            ];
+        }
+
+        return json_encode($stickers);
     }
+
 
     public function getItemPriceFromSteam($marketHashName): ?float
     {
