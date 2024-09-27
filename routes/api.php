@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
     // inventory routes
     Route::get('inventory/{userId}', [InventoryController::class, 'getInventory']);
+    Route::get('inventory/item/{marketHashName}', [InventoryController::class, 'getItemPriceByMarketHashName']);
 
     Route::post('withdraw', [WithdrawController::class, 'withdraw']);
     Route::post('deposit', [DepositController::class, 'deposit']);

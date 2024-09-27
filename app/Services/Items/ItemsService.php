@@ -14,6 +14,7 @@ class ItemsService
 {
     protected $client;
     protected $api;
+
     public function __construct()
     {
         $this->api = new SteamApi();

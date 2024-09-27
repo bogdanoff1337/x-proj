@@ -91,7 +91,8 @@ const userStore = useUserStore();
         align-items: center;
         justify-content: center;
         transition: background 0.3s ease;
-
+        width: 30px;
+        max-width: 25%;
         &:hover {
             background: #4a5568;
             .trade-input__icon {

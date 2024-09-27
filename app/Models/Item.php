@@ -26,6 +26,10 @@ class Item extends Model
         'stickers',
     ];
 
+    protected $casts = [
+        'stickers' => 'array',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

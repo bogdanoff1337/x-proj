@@ -3,7 +3,7 @@
 namespace App\Services\Inventory;
 
 use App\Repositories\Inventory\InventoryRepositoryInterface;
-use Illuminate\Support\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class InventoryService
 {
@@ -12,8 +12,13 @@ class InventoryService
     ){
     }
 
-    public function getInventory(string $id): Collection
+    public function getInventory(string $id): LengthAwarePaginator
     {
         return $this->inventoryRepository->getInventory($id);
+    }
+
+    public function getItemPriceByMarketHashName(string $marketHashName): int
+    {
+        return $this->inventoryRepository->getItemPriceByMarketHashName($marketHashName);
     }
 }

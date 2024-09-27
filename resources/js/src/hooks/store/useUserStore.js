@@ -1,11 +1,15 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import Alert from '../../../Components/Alert.vue';
+
 export const useUserStore = defineStore('user', {
     state: () => ({
         user: {
             id: null,
             trade_url: '',
             avatar: '',
+            notify: false,
+            allReadyHaveItems: false,
         },
         isAuthenticated: false,
         error: null,
@@ -28,12 +32,18 @@ export const useUserStore = defineStore('user', {
 
                 console.log('Trade URL updated:', response.data);
             } catch (error) {
-                console.error(error);
+                this.setError(error);
             }
         },
-
         setError(err) {
-            this.error = err;
+            if (err.response && err.response.status === 422) {
+                const errorMessage = err.response.data.message || 'An error occurred';
+                const errorDetails = err.response.data.errors ? Object.values(err.response.data.errors).flat().join(', ') : '';
+                this.error = `${errorMessage}: ${errorDetails}`;
+                Alert.methods.setError(this.error);
+            } else {
+                this.error = null;
+            }
         },
     },
 });

@@ -46,9 +46,13 @@ class SteamAuthController extends Controller
             ->where('id', $user->id)
             ->with('wallet')
             ->first();
-        $money = round($user->wallet->balance, $user->wallet->decimal_places);
+
+        $userHasItems = $user->items->isNotEmpty();
+        $money          = round($user->wallet->balance, $user->wallet->decimal_places);
         $formattedMoney = number_format($money / 100, 2);
-        $user->money = $formattedMoney;
+        $user->money    = $formattedMoney;
+        $user->notify   = false;
+        $user->allReadyHaveItems   = false;
 
         return response()->json(['data'  => $user]);
     }

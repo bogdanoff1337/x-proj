@@ -1,9 +1,10 @@
 <script setup>
 
 import Burger from './Burger.vue';
-import { ref, onMounted } from 'vue';
-import { useMediaQuery } from '@vueuse/core';
-import { useUserStore } from '../src/hooks/store/useUserStore';
+import Notifications from './Notifications.vue';
+import {ref, onMounted} from 'vue';
+import {useMediaQuery} from '@vueuse/core';
+import {useUserStore} from '../src/hooks/store/useUserStore';
 import axios from 'axios';
 
 const user = ref(null);
@@ -80,15 +81,19 @@ onMounted(checkAuth);
                             <PlusIcon class="header__icon"/>
                         </a>
 
+                        <span class="header__notify">
+                            <Notifications/>
+                        </span>
+
                         <router-link to="/profile" class="header__link">
-                            <img :src="user.avatar" alt="User" class="header__avatar" />
+                            <img :src="user.avatar" alt="User" class="header__avatar"/>
                         </router-link>
 
                         <a v-if="!isMobile" @click.prevent="logout" class="header__link">
                             <ExitIcon class="header__icon"/>
                         </a>
 
-                        <Burger v-else @logout="logout" />
+                        <Burger v-else @logout="logout"/>
                     </template>
 
                     <template v-else>
@@ -102,14 +107,16 @@ onMounted(checkAuth);
 
 <style scoped lang="scss">
 .header {
-    padding: 10px 0;
+    display: block;
+    width: 100%;
+    position: fixed;
 
     &__container {
         display: flex;
         justify-content: space-between;
         align-items: center;
         max-width: 2100px;
-        margin: 0 auto;
+        margin: 1.25rem auto;
         padding: 0 20px;
     }
 
@@ -172,6 +179,11 @@ onMounted(checkAuth);
         font-size: 22px;
     }
 
+    &__notify {
+        color: #fff;
+        font-size: 22px;
+    }
+
     &__button {
         background-color: #bd63bc;
         color: #fff;
@@ -191,8 +203,12 @@ onMounted(checkAuth);
             font-size: 18px;
         }
 
+        &__notify {
+            font-size: 18px;
+        }
+
         &__nav {
-            gap: 10px;
+            gap: 5px;
         }
 
         &__left img {

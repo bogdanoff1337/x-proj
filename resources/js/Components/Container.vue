@@ -10,8 +10,8 @@
 <style scoped>
 .container {
     max-width: 900px;
-    margin: 20px auto;
-    padding: 0 20px;
+    margin: 0 auto;
+    padding: 90px 20px;
     box-sizing: border-box;
 }
 </style>

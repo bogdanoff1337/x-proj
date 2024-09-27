@@ -8,12 +8,17 @@ import Inventory from "../../Components/Profile/Inventory.vue";
 
 <template>
     <Container>
-        <Tabs/>
-        <Profile/>
+        <div class="profile-main">
+            <Tabs/>
+            <Profile/>
+        </div>
         <Inventory/>
     </Container>
 </template>
 
 <style scoped lang="scss">
-
+.profile-main {
+    box-sizing: border-box;
+    background: #3A004E;
+}
 </style>
